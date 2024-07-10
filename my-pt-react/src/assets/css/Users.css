@@ -1,0 +1,1007 @@
+/*--------------------------------------------------------------
+# Services
+--------------------------------------------------------------*/
+.Buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+  
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+/* Updated styles for icon boxes */
+.services .icon-box {
+    text-align: center;
+    padding: 20px;
+    transition: all ease-in-out 0.3s;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    border-radius: 8px;
+}
+  
+.services .icon-box .icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: ease-in-out 0.3s;
+}
+  
+.services .icon-box .icon i {
+    font-size: 26px;
+    transition: 0.5s;
+}
+  
+.services .icon-box h4 {
+    font-weight: 500;
+    margin: 10px 0 15px 0;
+    font-size: 18px;
+    color: #08335b;
+    transition: ease-in-out 0.3s;
+}
+  
+.services .iconbox-blue:hover .icon i {
+    color: #47aeff;
+}
+  
+#services .logo {
+    font-family: "Poppins", sans-serif;
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 56px;
+    color: #08335b;
+    position: absolute;
+    top: 5px;
+    right: 45px;
+}
+  
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 8px;
+    padding: 0.5%;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: center;
+    padding-right: 3%;
+    padding-left: 3%;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Friends Modal Enhancements */
+.friend-item, .friend-request-item, .user-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.friend-name, .user-name {
+    flex-grow: 1;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.message-btn, .accept-btn, .decline-btn, .add-friend-btn {
+    background-color: white;
+    color: #0563bb;
+    border: 1px solid #0563bb;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.message-btn:hover {
+    background-color: #0678e3;
+    color: white;
+    border-color: #0678e3;
+}
+
+.accept-btn {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.accept-btn:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.decline-btn {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.decline-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.add-friend-btn {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.add-friend-btn:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+}
+
+#search-messages,
+#search-friends,
+#search-users {
+    width: calc(100% - 40px);
+    padding: 10px;
+    padding-left: 40px; /* Add space for the icon */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.compose-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #0563bb;
+    font-size: 24px;
+}
+
+.compose-button:hover {
+    color: #067ded;
+}
+
+.friends-navigation {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#friends-container {
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#message-input {
+    width: calc(100% - 80px);
+}
+
+#send-message {
+    width: 60px;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.input-group .form-control {
+    border-right: none;
+}
+
+.input-group .add-friend-button {
+    border-left: none;
+    background-color: white;
+    color: #0563bb;
+    border: 1px solid #ced4da;
+    border-radius: 0 4px 4px 0;
+}
+
+.input-group .add-friend-button:hover {
+    background-color: #0678e3;
+    color: white;
+    border-color: #0678e3;
+}
+
+.search-friends-button {
+    background-color: #0563bb;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.search-friends-button:hover {
+    background-color: #0678e3;
+}
+
+.input-group {
+    display: flex;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.input-group .form-control {
+    border-right: none;
+}
+
+.input-group .search-friends-button {
+    background-color: #0563bb;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.input-group .search-friends-button:hover {
+    background-color: #0678e3;
+}
+
+/* New styles to match */
+.search-container {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.search-wrapper .search-icon {
+    position: absolute;
+    left: 10px;
+    font-size: 20px;
+    color: #0563bb;
+}
+
+#search-users {
+    width: 100%;
+    padding: 10px;
+    padding-left: 35px; /* Add space for the icon */
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    flex-grow: 1;
+}
+
+.search-wrapper .search-button {
+    background-color: #0563bb;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.search-wrapper .search-button:hover {
+    background-color: #0678e3;
+}
+
+/* Conversation Modal Styles */
+#conversation-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 60%;
+    margin: auto;
+}
+
+#conversation-modal .modal-header,
+#conversation-modal .conversation-footer {
+    padding: 10px;
+    background-color: #f1f1f1b0;
+}
+
+#conversation-modal .modal-header h2 {
+    margin: 0;
+}
+
+#conversation-modal .modal-header .close {
+    cursor: pointer;
+}
+
+#conversation-modal .conversation-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #fff;
+}
+
+#conversation-modal .conversation-messages {
+    display: flex;
+    flex-direction: column;
+}
+
+#conversation-modal .message {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#conversation-modal .message.sent {
+    align-self: flex-end;
+    background-color: #dcf8c6;
+}
+
+#conversation-modal .message.received {
+    align-self: flex-start;
+    background-color: #ececec;
+}
+
+#conversation-modal .conversation-footer {
+    display: flex;
+    align-items: center;
+}
+
+#conversation-modal #message-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+#conversation-modal #send-message-btn {
+    padding: 10px 20px;
+    background-color: #0563bb;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#conversation-modal #send-message-btn:hover {
+    background-color: #0678e3;
+}
+
+/* Compose Message Modal */
+#compose-message-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+#compose-message-modal .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+#compose-message-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#compose-message-modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#compose-message-modal .close:hover,
+#compose-message-modal .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#compose-message-modal .form-group {
+    margin-bottom: 15px;
+}
+
+#compose-message-modal label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#compose-message-modal input[type="email"],
+#compose-message-modal input[type="text"],
+#compose-message-modal textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#compose-message-modal button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#compose-message-modal button:hover {
+    background-color: #0056b3;
+}
+
+/*--------------------------------------------------------------
+# Schedule Section
+--------------------------------------------------------------*/
+
+/* Style for the weekly hours schedule */
+#weekly-schedule {
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+    padding: 50px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style for the container of days */
+.days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align the days */
+    gap: 10px; /* Add gap between the boxes */
+}
+
+/* Style for each day */
+.day {
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(33.33% - 20px);
+    max-width: 300px;
+    text-align: center;
+}
+
+.container .icon-box .button-container {
+    margin: 0 auto;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: ease-in-out 0.3s;
+    position: relative;
+}
+
+.container .icon-box .button-container {
+    font-size: 36px;
+    transition: 0.5s;
+    position: relative;
+}
+
+.container .icon-box .icon svg path {
+    transition: 0.5s;
+    fill: #f5f5f5;
+}
+
+.day:hover {
+    border-color: #fff;
+    box-shadow: 0px 0 35px 0 rgba(0, 115, 157, 0.33);
+}
+
+/* Style for day headings */
+.day h2 {
+    margin-bottom: 20px;
+    padding-bottom: 5%;
+    color: #08335b;
+}
+
+/* Style for button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Style for start button */
+.day button.start {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px 20px;
+}
+
+.day button.start:hover {
+    background-color: #00ff1a;
+}
+
+#saveExercisesBtn {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#saveExercisesBtn:hover {
+    background-color: #1da1f2;
+}
+
+/* Style for edit button */
+.day button.edit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px 20px;
+}
+
+.day button.edit:hover {
+    background-color: #309bff;
+}
+
+/* Style for help button */
+.day button.help {
+    background-color: #8e8e8e;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px 20px;
+}
+
+.day button.help:hover {
+    background-color: #d6d6d6;
+    color: #000000;
+}
+
+/* Style for notes list */
+.day ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.day ul li {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid #ccc;
+}
+
+.day ul li:last-child {
+    border-bottom: none;
+}
+
+/* Style for the edit modal container */
+#editModalContainer {
+    display: flex;
+    gap: 20px;
+}
+
+.delete-exercise, .edit-exercise {
+    background-color: #007bff;
+    margin-right: 5px;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s
+}
+
+.edit-exercise:hover {
+    background-color: #1da1f2;
+}
+
+.delete-exercise:hover {
+    background-color: #ff0000;
+}
+
+
+
+/* Style for the exercise input container */
+#exerciseInputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#exerciseInputContainer input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#exerciseInputContainer input[type="text"]::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+#exerciseInputContainer label {
+    font-size: 16px;
+    color: #08335b;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+#exerciseInputContainer .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#exerciseInputContainer .form-group:last-child {
+    margin-bottom: 0;
+}
+
+#exerciseInputContainer .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#exerciseInputContainer .btn-primary:hover {
+    background-color: #1da1f2;
+}
+
+.exercise-list {
+    flex-grow: 1;
+    list-style-type: none;
+    padding: 0;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.exercise-list li:last-child {
+    border-bottom: none;
+}
+
+.exercise-list li .btn {
+    padding: 5px 10px;
+}
+
+@media (max-width: 700px) {
+    #editModalContainer {
+        flex-direction: column;
+    }
+
+    #exerciseInputContainer {
+        display: none;
+    }
+
+    #toggleInputContainerBtn {
+        display: block;
+    }
+}
+
+#toggleInputContainerBtn {
+    display: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+#toggleInputContainerBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Style for the Schedule Popup */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.7); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; 
+    border: 1px solid #888;
+    width: 80%; 
+    z-index: 1001; 
+    position: relative; 
+    border-radius: 8px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(255, 0, 0);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Profile Section */
+.profile-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 5%;
+}
+
+.profile-picture {
+    flex: 0 0 150px;
+}
+
+.profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.profile-details h2 {
+    margin-top: 0;
+}
+
+.Profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.edit-profile-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1da1f2;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.edit-profile-button:hover {
+    background-color: #0e87d7;
+}
+
+.save-changes-button {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #1da1f2;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.save-changes-button:hover {
+    background-color: #0e87d7;
+}
+
+/* Edit Profile Popup */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity to obscure background */
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    z-index: 1001; /* Ensure content stays on top of the background */
+    position: relative; /* Ensure z-index applies to the content */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #888;
+}
+
+.close:hover {
+    color: #ff0000;
+}
+
+.popup h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.popup label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.popup input[type="text"],
+.popup input[type="email"],
+.popup input[type="tel"],
+.popup textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.popup input[type="file"] {
+    margin-top: 10px;
+}
+
+/* Clients Modal Enhancements */
+.client-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .client-item .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .client-item .client-name {
+    flex-grow: 1;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .client-item .remove-client-btn {
+    background-color: white;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .client-item .remove-client-btn:hover {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .form-control {
+    width: calc(100% - 40px);
+    padding: 10px;
+    padding-left: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-friends-button {
+    background-color: #0563bb;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}

@@ -1,3 +1,4 @@
+/* Timer.css */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 body {
@@ -5,9 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #0d0d0d;
   font-family: 'Orbitron', sans-serif;
-  color: #e0e0e0;
   margin: 0;
   overflow: hidden;
 }
@@ -54,7 +53,7 @@ body {
   color: #cccccc;
 }
 
-button {
+.timerbuttons {
   padding: 15px 30px;
   font-size: 1.2rem;
   background-color: #00ffff;
@@ -68,7 +67,7 @@ button {
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
 }
 
-button:hover {
+.timerbuttons:hover {
   background-color: #00ff00;
   color: #0d0d0d;
   box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);

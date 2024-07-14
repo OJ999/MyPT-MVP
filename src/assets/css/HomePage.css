@@ -1,0 +1,459 @@
+/* HomePage.css */
+
+.homepage-container {
+    position: relative;
+  }
+  
+  .logout-button {
+    position: absolute;
+    bottom: 10px;
+    left: 1230px;
+    padding: 10px 20px;
+    background-color: #0563bb;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #0678e3;
+  }
+  
+  .animated-button {
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .animated-button:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.75s;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  
+  .animated-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .animated-button:active:after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    transition: 0s;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out forwards;
+  }
+  
+  .fade-out {
+    animation: fadeOut 0.3s ease-in-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+  }
+  
+  .Buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .services .icon-box {
+    text-align: center;
+    padding: 20px;
+    transition: all ease-in-out 0.3s;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    border-radius: 8px;
+  }
+  
+  .services .icon-box .icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: ease-in-out 0.3s;
+  }
+  
+  .services .icon-box .icon i {
+    font-size: 26px;
+    transition: 0.5s;
+  }
+  
+  .services .icon-box h4 {
+    font-weight: 500;
+    margin: 10px 0 15px 0;
+    font-size: 18px;
+    color: #08335b;
+    transition: ease-in-out 0.3s;
+  }
+  
+  .services .iconbox-blue:hover .icon i {
+    color: #47aeff;
+  }
+  
+  #services .logo {
+    font-family: "Poppins", sans-serif;
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 56px;
+    color: #08335b;
+    position: absolute;
+    bottom: 600px;
+    right: 45px;
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  #modalDayTitle {
+    font-family: 'Poppins', sans-serif; /* Modern, clean font */
+    font-size: 28px; /* Slightly larger for emphasis */
+    font-weight: 600; /* Bold for importance */
+    color: #08335b; /* Dark blue for professionalism */
+    text-align: center; /* Centered text */
+    margin: 0; /* Space around the heading */
+    padding: 10px 20px; /* Padding for better readability */
+    border-bottom: 2px solid #0563bb; /* Stylish underline */
+    text-transform: uppercase; /* Uppercase letters for a formal look */
+    letter-spacing: 1px; /* Spaced letters for readability */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background: linear-gradient(90deg, rgba(5, 99, 187, 0.1), rgba(8, 51, 91, 0.1)); /* Gradient background for a sleek look */
+    border-radius: 8px; /* Rounded corners for a modern feel */
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    border: 1px solid #888;
+    width: 80%;
+    z-index: 1001;
+    position: relative;
+    border-radius: 8px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    padding-right: 15px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: rgb(255, 0, 0);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  #weekly-schedule {
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+    padding: 50px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .day {
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(33.33% - 20px);
+    max-width: 300px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .container .icon-box .button-container {
+    margin: 0 auto;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: ease-in-out 0.3s;
+    position: relative;
+  }
+  
+  .container .icon-box .button-container {
+    font-size: 36px;
+    transition: 0.5s;
+    position: relative;
+  }
+  
+  .container .icon-box .icon svg path {
+    transition: 0.5s;
+    fill: #f5f5f5;
+  }
+  
+  .day:hover {
+    border-color: #fff;
+    box-shadow: 0px 0 35px 0 rgba(0, 115, 157, 0.33);
+    transform: scale(1.05);
+  }
+  
+  .day h2 {
+    margin-bottom: 20px;
+    padding-bottom: 5%;
+    color: #08335b;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .day button.start {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px 20px;
+  }
+  
+  .day button.start:hover {
+    background-color: #00ff1a;
+  }
+  
+  #saveExercisesBtn {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  #saveExercisesBtn:hover {
+    background-color: #1da1f2;
+  }
+  
+  .day button.edit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px 20px;
+  }
+  
+  .day button.edit:hover {
+    background-color: #309bff;
+  }
+  
+  .day ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .day ul li {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .day ul li:last-child {
+    border-bottom: none;
+  }
+  
+  #editModalContainer {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .delete-exercise, .edit-exercise {
+    background-color: #007bff;
+    margin-right: 5px;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .edit-exercise:hover {
+    background-color: #1da1f2;
+  }
+  
+  .delete-exercise:hover {
+    background-color: #ff0000;
+  }
+  
+  #exerciseInputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  #exerciseInputContainer input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  #exerciseInputContainer input[type="text"]::placeholder {
+    color: #aaa;
+    font-style: italic;
+  }
+  
+  #exerciseInputContainer label {
+    font-size: 16px;
+    color: #08335b;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  #exerciseInputContainer .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #exerciseInputContainer .form-group:last-child {
+    margin-bottom: 0;
+  }
+  
+  #exerciseInputContainer .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #exerciseInputContainer .btn-primary:hover {
+    background-color: #1da1f2;
+  }
+  
+  .exercise-list {
+    flex-grow: 1;
+    list-style-type: none;
+    padding: 0;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .exercise-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .exercise-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .exercise-list li .btn {
+    padding: 5px 10px;
+  }
+  
+  @media (max-width: 700px) {
+    #editModalContainer {
+      flex-direction: column;
+    }
+  
+    #exerciseInputContainer {
+      display: none;
+    }
+  
+    #toggleInputContainerBtn {
+      display: block;
+    }
+  }
+  
+  #toggleInputContainerBtn {
+    display: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  #toggleInputContainerBtn:hover {
+    background-color: #0056b3;
+  }
+  

@@ -1,20 +1,57 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 import '../assets/css/MainPage.css';
 
 const MainPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [popupVisible, setPopupVisible] = useState(false);
+  const [regUsername, setRegUsername] = useState('');
+  const [regPassword, setRegPassword] = useState('');
+  const history = useHistory();
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    // Add sign-in logic here
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', { username, password });
+      const userData = response.data;
+
+      if (userData) {
+        localStorage.setItem('currentUser', JSON.stringify(userData));
+        if (userData.category === 'PersonalTrainer') {
+          history.push('/HomePage');
+        } else {
+          history.push('/user1');
+        }
+      } else {
+        alert('Invalid username or password.');
+      }
+    } catch (error) {
+      alert('Invalid username or password.');
+    }
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    // Add registration logic here
+    try {
+      const response = await axios.post('http://localhost:5000/api/register', { username: regUsername, password: regPassword });
+
+      if (response.status === 201) {
+        localStorage.setItem('currentUser', JSON.stringify(response.data));
+        history.push('/termsconditions');
+      } else {
+        alert('Registration failed.');
+      }
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        alert(error.response.data.message);
+      } else {
+        alert('Registration failed.');
+      }
+    }
   };
 
   const showPopup = () => setPopupVisible(true);
@@ -27,24 +64,34 @@ const MainPage = () => {
     const typeText = (text) => {
       return new Promise((resolve) => {
         const element = document.getElementById('animated-text');
-        element.textContent = text;
-        element.classList.add('typing');
-        setTimeout(() => {
-          element.classList.remove('typing');
+        if (element) {
+          element.textContent = text;
+          element.classList.add('typing');
+          setTimeout(() => {
+            if (element) element.classList.remove('typing');
+            resolve();
+          }, 2000); // Adjusted duration for more professional look
+        } else {
           resolve();
-        }, 2000); // Adjusted duration for more professional look
+        }
       });
     };
 
     const eraseText = () => {
       return new Promise((resolve) => {
         const element = document.getElementById('animated-text');
-        element.classList.add('erasing');
-        setTimeout(() => {
-          element.textContent = '';
-          element.classList.remove('erasing');
+        if (element) {
+          element.classList.add('erasing');
+          setTimeout(() => {
+            if (element) {
+              element.textContent = '';
+              element.classList.remove('erasing');
+            }
+            resolve();
+          }, 1000); // Adjusted duration for more professional look
+        } else {
           resolve();
-        }, 1000); // Adjusted duration for more professional look
+        }
       });
     };
 
@@ -74,16 +121,8 @@ const MainPage = () => {
         <div id="popupContainer" className="mainpage-popup-container">
           <form id="popup" className="mainpage-popup" onSubmit={handleRegister}>
             <span className="close" onClick={hidePopup}>&times;</span>
-            <input type="text" id="popupFullName" placeholder="Full Name" required />
-            <input type="text" id="popupUsername" placeholder="Username" required />
-            <input type="password" id="popupPassword" placeholder="Password" required />
-            <input type="email" id="popupEmail" placeholder="Email / Phone Number" required />
-            <label htmlFor="category">Select Category:</label>
-            <select name="category" id="category" required>
-              <option value="" disabled selected> - </option>
-              <option value="PersonalTrainer">Personal Trainer</option>
-              <option value="Client">Client / Other</option>
-            </select>
+            <input type="text" id="popupUsername" placeholder="Username" value={regUsername} onChange={(e) => setRegUsername(e.target.value)} required />
+            <input type="password" id="popupPassword" placeholder="Password" value={regPassword} onChange={(e) => setRegPassword(e.target.value)} required />
             <br />
             <input type="submit" value="Sign Up" />
           </form>

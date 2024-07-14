@@ -206,20 +206,20 @@ const HomePage = () => {
                   <input type="number" id="exerciseReps" placeholder="Number Of Reps" min="0" />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exerciseTimePerRep">Seconds per Rep</label>
-                  <input type="number" id="exerciseTimePerRep" placeholder="Seconds per Rep" min="0" />
+                  <label htmlFor="exerciseTimePerRep">Seconds / Rep</label>
+                  <input type="number" id="exerciseTimePerRep" placeholder="Seconds / Rep" min="0" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="exerciseSets">Number Of Sets</label>
                   <input type="number" id="exerciseSets" placeholder="Number Of Sets" min="0" />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exerciseBreak">Break Time</label>
-                  <input type="number" id="exerciseBreak" placeholder="Break Time" min="0" />
+                  <label htmlFor="exerciseBreak">Break Between</label>
+                  <input type="number" id="exerciseBreak" placeholder="Break Between" min="0" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="breakAfterExercise">Break After Exercise</label>
-                  <input type="number" id="breakAfterExercise" placeholder="Break After Exercise" min="0" />
+                  <input type="number" id="breakAfterExercise" placeholder="Break After" min="0" />
                 </div>
                 <button id="addExerciseBtn" className="btn-primary" onClick={addExercise}>
                   {editIndex !== null ? 'Update Exercise' : 'Add Exercise'}

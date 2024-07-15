@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../assets/css/HomePage.css';
 import axios from 'axios';
+import bodyParser from 'body-parser';
 
 const HomePage = () => {
   const [city, setCity] = useState("");
@@ -166,6 +167,7 @@ const HomePage = () => {
   };
 
   return (
+    <body className='HomePagebody'>
     <div className="homepage-container">
       <section id="services" className="services">
         <div className="services">
@@ -191,8 +193,8 @@ const HomePage = () => {
       {/* Edit Schedule Modal */}
       <div id="editModal" className="modal">
         <div className="modal-content">
-          <span className="close" onClick={() => closeModal('editModal')}>&times;</span>
-          <h2 id="modalDayTitle">{currentDay}</h2>
+          
+          <h2 id="modalDayTitle">{currentDay} <span className="close" onClick={() => closeModal('editModal')}>&times;</span></h2>
           <button id="toggleInputContainerBtn" className="btn-primary" onClick={toggleInputContainer}>Show/Hide Inputs</button>
           <div id="editModalContainer">
             {showInputs && (
@@ -245,6 +247,7 @@ const HomePage = () => {
       </div>
       <button className="logout-button" onClick={handleLogout}>Log Out</button>
     </div>
+    </body>
   );
 };
 

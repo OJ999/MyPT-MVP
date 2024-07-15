@@ -70,6 +70,7 @@ const Timer = ({ exercises = {}, currentDay }) => {
   };
 
   return (
+    <body className="Timerbody"> 
     <div className="timer-container">
       <h1>Exercise Timer</h1>
       {exercises[currentDay] && exercises[currentDay][currentExerciseIndex] && (
@@ -87,6 +88,7 @@ const Timer = ({ exercises = {}, currentDay }) => {
       <button className='timerbuttons' onClick={handleStop}>Stop</button>
       <button className='timerbuttons' onClick={handleReset}>Reset</button>
     </div>
+    </body>
   );
 };
 

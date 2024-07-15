@@ -1,7 +1,7 @@
 /* Timer.css */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-body {
+.Timerbody {
   display: flex;
   justify-content: center;
   align-items: center;

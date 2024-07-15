@@ -108,6 +108,7 @@ const MainPage = () => {
   }, []);
 
   return (
+    <body className='MainPagebody'> 
     <div className="mainpage-container" data-aos="zoom-in" data-aos-delay="1000">
       <h1>My PT</h1>
       <p>I Will <span id="animated-text-container"><span id="animated-text"></span></span></p>
@@ -135,6 +136,7 @@ const MainPage = () => {
         <a href="#"><i className="fab fa-linkedin-in"></i></a>
       </div>
     </div>
+    </body>
   );
 };
 

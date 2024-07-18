@@ -1,8 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getExercises, addExercise, deleteExercise as deleteExerciseApi } from '../services/apiService';
+import { getExercises, addExercise, updateExercise, deleteExercise } from '../services/apiService';
 import '../assets/css/HomePage.css';
 
 function HomePage() {
@@ -22,7 +20,13 @@ function HomePage() {
     const fetchExercises = async () => {
       try {
         const fetchedExercises = await getExercises();
-        setExercises(fetchedExercises);
+        const exercisesByDay = fetchedExercises.reduce((acc, exercise) => {
+          const { day } = exercise;
+          if (!acc[day]) acc[day] = [];
+          acc[day].push(exercise);
+          return acc;
+        }, {});
+        setExercises(exercisesByDay);
       } catch (error) {
         console.error('Failed to fetch exercises:', error);
       }
@@ -96,22 +100,19 @@ function HomePage() {
 
       const dayExercises = exercises[currentDay] || [];
       if (editIndex !== null) {
-        dayExercises[editIndex] = newExercise;
+        const updatedExercise = await updateExercise(dayExercises[editIndex]._id, newExercise);
+        dayExercises[editIndex] = updatedExercise;
         setEditIndex(null);
       } else {
-        dayExercises.push(newExercise);
+        const addedExercise = await addExercise(newExercise);
+        dayExercises.push(addedExercise);
       }
 
-      try {
-        await addExercise(newExercise);
-        setExercises(prevExercises => ({
-          ...prevExercises,
-          [currentDay]: dayExercises
-        }));
-        clearInputs();
-      } catch (error) {
-        console.error('Failed to add exercise:', error);
-      }
+      setExercises(prevExercises => ({
+        ...prevExercises,
+        [currentDay]: dayExercises
+      }));
+      clearInputs();
     } else {
       alert('Please fill out all fields.');
     }
@@ -126,7 +127,7 @@ function HomePage() {
     });
 
     deleteButtons.forEach((button, index) => {
-      button.onclick = () => deleteExercise(index);
+      button.onclick = () => deleteExerciseHandler(index);
     });
   };
 
@@ -144,14 +145,15 @@ function HomePage() {
     setShowInputs(true); // Ensure input container is visible when editing
   };
 
-  const deleteExercise = async (index) => {
-    const updatedExercises = exercises[currentDay].filter((_, i) => i !== index);
-    setExercises(prevExercises => ({
-      ...prevExercises,
-      [currentDay]: updatedExercises
-    }));
+  const deleteExerciseHandler = async (index) => {
+    const exerciseId = exercises[currentDay][index]._id;
     try {
-      await deleteExerciseApi(exercises[currentDay][index]._id);
+      await deleteExercise(exerciseId);
+      const updatedExercises = exercises[currentDay].filter((_, i) => i !== index);
+      setExercises(prevExercises => ({
+        ...prevExercises,
+        [currentDay]: updatedExercises
+      }));
     } catch (error) {
       console.error('Failed to delete exercise:', error);
     }
@@ -243,8 +245,8 @@ function HomePage() {
                   <li key={index}>
                     <span>{exercise.name} - {exercise.reps} Reps - {exercise.timePerRep} sec/Rep - {exercise.sets} Sets - {exercise.break}s Break - {exercise.breakAfter}s Break After</span>
                     <div>
-                      <button className="btn btn-outline-secondary btn-sm edit-exercise">Edit</button>
-                      <button className="btn btn-outline-danger btn-sm delete-exercise">Delete</button>
+                      <button className="btn btn-outline-secondary btn-sm edit-exercise" onClick={() => editExercise(index)}>Edit</button>
+                      <button className="btn btn-outline-danger btn-sm delete-exercise" onClick={() => deleteExerciseHandler(index)}>Delete</button>
                     </div>
                   </li>
                 ))}

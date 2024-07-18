@@ -18,8 +18,8 @@
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.5);
   border: 1px solid #00ffff;
-  width: 400px; /* Fixed width */
-  height: 600px; /* Fixed height */
+  width: 600px; /* Fixed width */
+  height: 700px; /* Fixed height */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -50,6 +50,30 @@
 .details {
   margin-bottom: 20px;
   font-size: 1.5rem;
+  color: #cccccc;
+}
+
+/* New styles for exercise details */
+.exercise-details {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: #00ffff;
+  background-color: #282828;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  border: 1px solid #00ffff;
+}
+
+.exercise-details h2 {
+  font-size: 1.5rem;
+  color: #00ff00;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+}
+
+.exercise-details p {
+  margin: 5px 0;
   color: #cccccc;
 }
 

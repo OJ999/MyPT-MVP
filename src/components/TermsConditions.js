@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import '../assets/css/TermsConditions.css';
@@ -8,16 +9,11 @@ const TermsConditions = () => {
   const continueToNextPage = () => {
     const currentUser = localStorage.getItem('currentUser');
     const userData = JSON.parse(currentUser);
-
-    if (userData.category === 'PersonalTrainer') {
-      history.push('/HomePage');
-    } else {
-      history.push('/user1');
-    }
+    history.push('/HomePage');
   };
 
   return (
-    <div className="TC-container">
+    <div className="terms-container">
       <section id="terms" className="terms">
         <div className="container">
           <div className="terms-box">
@@ -26,7 +22,6 @@ const TermsConditions = () => {
             </div>
             <div className="terms-box2">
               <div className="terms-content">
-                {<div className="terms-content">
                 <p>
                   By accessing or using the My-PT application ("My-PT" or the "Application") provided by [Owner Name] ("Owner" or "We" or "Us"
                   or "Company"), you agree to comply with these Terms and Conditions, which constitute a legally binding agreement between you
@@ -89,9 +84,7 @@ const TermsConditions = () => {
                 <p>
                   13. Severability: If any provision of these Terms and Conditions is found to be unlawful, void, or unenforceable, that provision
                   shall be deemed severable from these Terms and Conditions and shall not affect the validity and enforceability of any remaining
-                  provisions.Severability: If any provision of these Terms and Conditions is found to be unlawful, void, or unenforceable, that
-                  provision shall be deemed severable from these Terms and Conditions and shall not affect the validity and enforceability of any
-                  remaining provisions.
+                  provisions.
                 </p>
                 <p>
                   14. Entire Agreement: These Terms and Conditions constitute the entire agreement between you and the Owner regarding your use
@@ -105,12 +98,10 @@ const TermsConditions = () => {
                   obligations when using My-PT.
                 </p>
               </div>
-            }
-              </div>
             </div>
             <div className="terms-agreement">
               <input type="checkbox" id="agree" name="agree" required />
-              <label htmlFor="agree" required >I agree to the terms and conditions</label>
+              <label htmlFor="agree">I agree to the terms and conditions</label>
             </div>
             <div className="terms-button">
               <button type="button" className="btn btn-primary" onClick={continueToNextPage}>Continue</button>

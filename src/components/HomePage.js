@@ -1,13 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { getExercises, addExercise, deleteExercise as deleteExerciseApi } from '../services/apiService';
 import '../assets/css/HomePage.css';
-import axios from 'axios';
-import bodyParser from 'body-parser';
 
-const HomePage = () => {
+function HomePage() {
   const [city, setCity] = useState("");
   const [editIndex, setEditIndex] = useState(null);
   const [exercises, setExercises] = useState({});
@@ -21,20 +19,19 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const openModal = (modalId) => {
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.style.display = 'block';
+    const fetchExercises = async () => {
+      try {
+        const fetchedExercises = await getExercises();
+        setExercises(fetchedExercises);
+      } catch (error) {
+        console.error('Failed to fetch exercises:', error);
       }
     };
 
-    const closeModal = (modalId) => {
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.style.display = 'none';
-      }
-    };
+    fetchExercises();
+  }, []);
 
+  useEffect(() => {
     const setupModal = (modalId, triggerClass) => {
       const triggers = document.querySelectorAll(triggerClass);
       triggers.forEach(trigger => {
@@ -78,7 +75,7 @@ const HomePage = () => {
     }
   };
 
-  const addExercise = () => {
+  const addExerciseHandler = async () => {
     const exerciseName = document.getElementById('exerciseName').value;
     const exerciseReps = document.getElementById('exerciseReps').value;
     const exerciseTimePerRep = document.getElementById('exerciseTimePerRep').value;
@@ -93,7 +90,8 @@ const HomePage = () => {
         timePerRep: exerciseTimePerRep,
         sets: exerciseSets,
         break: exerciseBreak,
-        breakAfter: breakAfterExercise
+        breakAfter: breakAfterExercise,
+        day: currentDay
       };
 
       const dayExercises = exercises[currentDay] || [];
@@ -104,13 +102,16 @@ const HomePage = () => {
         dayExercises.push(newExercise);
       }
 
-      setExercises({
-        ...exercises,
-        [currentDay]: dayExercises
-      });
-
-      // Clear inputs after adding
-      clearInputs();
+      try {
+        await addExercise(newExercise);
+        setExercises(prevExercises => ({
+          ...prevExercises,
+          [currentDay]: dayExercises
+        }));
+        clearInputs();
+      } catch (error) {
+        console.error('Failed to add exercise:', error);
+      }
     } else {
       alert('Please fill out all fields.');
     }
@@ -130,8 +131,7 @@ const HomePage = () => {
   };
 
   const editExercise = (index) => {
-    const dayExercises = exercises[currentDay];
-    const exercise = dayExercises[index];
+    const exercise = exercises[currentDay][index];
 
     document.getElementById('exerciseName').value = exercise.name;
     document.getElementById('exerciseReps').value = exercise.reps;
@@ -144,13 +144,17 @@ const HomePage = () => {
     setShowInputs(true); // Ensure input container is visible when editing
   };
 
-  const deleteExercise = (index) => {
-    const dayExercises = exercises[currentDay];
-    dayExercises.splice(index, 1);
-    setExercises({
-      ...exercises,
-      [currentDay]: dayExercises
-    });
+  const deleteExercise = async (index) => {
+    const updatedExercises = exercises[currentDay].filter((_, i) => i !== index);
+    setExercises(prevExercises => ({
+      ...prevExercises,
+      [currentDay]: updatedExercises
+    }));
+    try {
+      await deleteExerciseApi(exercises[currentDay][index]._id);
+    } catch (error) {
+      console.error('Failed to delete exercise:', error);
+    }
   };
 
   const toggleInputContainer = () => {
@@ -166,89 +170,95 @@ const HomePage = () => {
     document.getElementById('breakAfterExercise').value = '';
   };
 
+  const startTraining = (day) => {
+    history.push({
+      pathname: '/timer',
+      state: { exercises: exercises[day], day }
+    });
+  };
+
   return (
-    <body className='HomePagebody'>
     <div className="homepage-container">
       <section id="services" className="services">
         <div className="services">
           <div className="logo"> {city} My PT</div>
         </div>
       </section>
-      <div className="container">
-        <div className="row days">
-          {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => (
-            <div key={day} className="col-lg-4 col-md-6 align-items-stretch day" data-aos="zoom-in" data-aos-delay="100">
-              <div className="icon-box">
-                <h2>{day}</h2>
-                <div className="button-container">
-                  <button type="button" className="btn btn-outline-success btn-sm start">Start</button>
-                  <button type="button" className="btn btn-outline-secondary btn-sm edit" data-day={day}>Edit</button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Edit Schedule Modal */}
-      <div id="editModal" className="modal">
-        <div className="modal-content">
-          
-          <h2 id="modalDayTitle">{currentDay} <span className="close" onClick={() => closeModal('editModal')}>&times;</span></h2>
-          <button id="toggleInputContainerBtn" className="btn-primary" onClick={toggleInputContainer}>Show/Hide Inputs</button>
-          <div id="editModalContainer">
-            {showInputs && (
-              <div id="exerciseInputContainer">
-                <div className="form-group">
-                  <label htmlFor="exerciseName">Exercise Name</label>
-                  <input type="text" id="exerciseName" placeholder="Exercise Name" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exerciseReps">Number Of Reps</label>
-                  <input type="number" id="exerciseReps" placeholder="Number Of Reps" min="0" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exerciseTimePerRep">Seconds / Rep</label>
-                  <input type="number" id="exerciseTimePerRep" placeholder="Seconds / Rep" min="0" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exerciseSets">Number Of Sets</label>
-                  <input type="number" id="exerciseSets" placeholder="Number Of Sets" min="0" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exerciseBreak">Break Between</label>
-                  <input type="number" id="exerciseBreak" placeholder="Break Between" min="0" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="breakAfterExercise">Break After Exercise</label>
-                  <input type="number" id="breakAfterExercise" placeholder="Break After" min="0" />
-                </div>
-                <button id="addExerciseBtn" className="btn-primary" onClick={addExercise}>
-                  {editIndex !== null ? 'Update Exercise' : 'Add Exercise'}
-                </button>
-              </div>
-            )}
-            <ul id="exerciseList" className="exercise-list">
-              {(exercises[currentDay] || []).map((exercise, index) => (
-                <li key={index}>
-                  <span>{exercise.name} - {exercise.reps} Reps - {exercise.timePerRep} sec/Rep - {exercise.sets} Sets - {exercise.break}s Break - {exercise.breakAfter}s Break After</span>
-                  <div>
-                    <button className="btn btn-outline-secondary btn-sm edit-exercise">Edit</button>
-                    <button className="btn btn-outline-danger btn-sm delete-exercise">Delete</button>
+      <div className='HomePagebody'>
+        <div className="container">
+          <div className="row days">
+            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => (
+              <div key={day} className="col-lg-4 col-md-6 align-items-stretch day" data-aos="zoom-in" data-aos-delay="100">
+                <div className="icon-box">
+                  <h2>{day}</h2>
+                  <div className="button-container">
+                    <button type="button" className="btn btn-outline-success btn-sm start" onClick={() => startTraining(day)}>Start</button>
+                    <button type="button" className="btn btn-outline-secondary btn-sm edit" data-day={day}>Edit</button>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="button-container">
-            <button id="saveExercisesBtn" className="btn-primary" onClick={() => alert('Exercises saved successfully!')}>Save</button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* Edit Schedule Modal */}
+        <div id="editModal" className="modal">
+          <div className="modal-content">
+            <h2 id="modalDayTitle">{currentDay} <span className="close" onClick={() => closeModal('editModal')}>&times;</span></h2>
+            <button id="toggleInputContainerBtn" className="btn-primary" onClick={toggleInputContainer}>Show/Hide Inputs</button>
+            <div id="editModalContainer">
+              {showInputs && (
+                <div id="exerciseInputContainer">
+                  <div className="form-group">
+                    <label htmlFor="exerciseName">Exercise Name</label>
+                    <input type="text" id="exerciseName" placeholder="Exercise Name" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exerciseReps">Number Of Reps</label>
+                    <input type="number" id="exerciseReps" placeholder="Number Of Reps" min="0" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exerciseTimePerRep">Seconds / Rep</label>
+                    <input type="number" id="exerciseTimePerRep" placeholder="Seconds / Rep" min="0" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exerciseSets">Number Of Sets</label>
+                    <input type="number" id="exerciseSets" placeholder="Number Of Sets" min="0" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exerciseBreak">Break Between</label>
+                    <input type="number" id="exerciseBreak" placeholder="Break Between" min="0" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="breakAfterExercise">Break After Exercise</label>
+                    <input type="number" id="breakAfterExercise" placeholder="Break After" min="0" />
+                  </div>
+                  <button id="addExerciseBtn" className="btn-primary" onClick={addExerciseHandler}>
+                    {editIndex !== null ? 'Update Exercise' : 'Add Exercise'}
+                  </button>
+                </div>
+              )}
+              <ul id="exerciseList" className="exercise-list">
+                {(exercises[currentDay] || []).map((exercise, index) => (
+                  <li key={index}>
+                    <span>{exercise.name} - {exercise.reps} Reps - {exercise.timePerRep} sec/Rep - {exercise.sets} Sets - {exercise.break}s Break - {exercise.breakAfter}s Break After</span>
+                    <div>
+                      <button className="btn btn-outline-secondary btn-sm edit-exercise">Edit</button>
+                      <button className="btn btn-outline-danger btn-sm delete-exercise">Delete</button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="button-container">
+              <button id="saveExercisesBtn" className="btn-primary" onClick={() => alert('Exercises saved successfully!')}>Save</button>
+            </div>
+          </div>
+        </div>
+        <button className="logout-button" onClick={handleLogout}>Log Out</button>
       </div>
-      <button className="logout-button" onClick={handleLogout}>Log Out</button>
     </div>
-    </body>
   );
-};
+}
 
 export default HomePage;
